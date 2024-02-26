@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="margin">
+    <h2>{{ title }}</h2>
+    <form action="{{ url_for('config_change_email') }}" method="POST">
+    {{ emailchange_form.hidden_tag() }}
+
+        <table class="table">
+            <p>
+                {{ emailchange_form.email.label }}<br>
+                {{ emailchange_form.email() }}<br>
+                {% for error in emailchange_form.email.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+        </table>
+
+        {{  emailchange_form.submit()  }}
+
+    </form>
+</div>
+
+{% endblock %}

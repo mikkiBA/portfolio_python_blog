@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+
+<div class="margin">
+    <h3>一般ユーザー 一覧</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">ユーザー名</th>
+                <th scope="col">ふりがな</th>
+                <th scope="col">パスワード</th>
+                <th scope="col">メールアドレス</th>
+                <th scope="col">性別</th>
+                <th scope="col">自己紹介</th>
+                <th scope="col">アイコン</th>
+                <th scope="col">アクセス拒否設定</th>
+                <th scope="col">アカウント登録日</th>
+                <th scope="col">情報更新日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for user in general_users %}
+            <tr>
+                <th scope="row">{{ user.id }}</th>
+                <th>{{ user.user_name }}</th>
+                <th>{{ user.furigana }}</th>
+                <th>{{ user.password }}</th>
+                <th>{{ user.email }}</th>
+                    {% if user.gender == 'f' %}
+                    <th>女</th>
+                    {% else %}
+                    <th>男</th>
+                    {% endif %}
+                <th>{{ user.profile }}</th>
+                <th>{{ user.icon_file_name }}</th>
+                    {% if user.inaccessible == True %}
+                    <th>ON</th>
+                    {% else %}
+                    <th>OFF</th>
+                    {% endif %}
+                <td>{{ user.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>{{ user.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            
+                <td>
+                    <a class="btn btn-outline-primary" href="{{ url_for('user_edit', user_id=user.id) }}" role="button">編集</a>
+                </td>
+
+                <td>
+                    <a class="btn btn-outline-primary" href="{{ url_for('user_delete', user_id=user.id) }}" role="button">削除</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<div class="margin">
+    <a class="btn btn--orange" href="{{ url_for('user_add') }}" role="button">新規アカウント追加</a>
+</div>
+
+<br>
+<div class="margin">
+    <h3>管理者 一覧</h3>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">id</th>
+                        <th scope="col">ユーザー名</th>
+                        <th scope="col">ふりがな</th>
+                        <th scope="col">パスワード</th>
+                        <th scope="col">メールアドレス</th>
+                        <th scope="col">性別</th>
+                        <th scope="col">自己紹介</th>
+                        <th scope="col">アイコン</th>
+                        <th scope="col">アクセス拒否設定</th>
+                        <th scope="col">アカウント登録日</th>
+                        <th scope="col">情報更新日</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for admin in admin_users %}
+                    <tr>
+                        <th scope="row">{{ admin.id }}</th>
+                        <th>{{ admin.user_name }}</th>
+                        <th>{{ admin.furigana }}</th>
+                        <th>{{ admin.password }}</th>
+                        <th>{{ admin.email }}</th>
+                            {% if admin.gender == 'f' %}
+                            <th>女</th>
+                            {% else %}
+                            <th>男</th>
+                            {% endif %}
+                        <th>{{ admin.profile }}</th>
+                        <th>{{ admin.icon_file_name }}</th>
+                            {% if admin.inaccessible == True %}
+                            <th>ON</th>
+                            {% else %}
+                            <th>OFF</th>
+                            {% endif %}
+                        <td>{{ admin.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ admin.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    
+                        <td>
+                            <a class="btn btn-outline-primary" href="{{ url_for('user_edit', user_id=admin.id) }}" role="button">編集</a>
+                        </td>
+        
+                        <td>
+                            <a class="btn btn-outline-primary" href="{{ url_for('user_delete', user_id=admin.id) }}" role="button">削除</a>
+                        </td>
+        
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+</div>
+
+{% endblock %}

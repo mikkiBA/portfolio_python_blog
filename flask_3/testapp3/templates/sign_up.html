@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>試作blog</title>
+    <h3 class="title_banner">ブログ風SNS</h3>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css"> 
+</head>
+
+<body>
+    <div class="margin">
+        <h4>新規登録</h4>
+    </div>
+
+    <form action="/sign_up" method="post">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        {{ signup_form.hidden_tag() }}
+
+        <div class="margin">
+            <table class="table">
+                <p>
+                    {{ signup_form.user_name.label }}<br>
+                    {{ signup_form.user_name() }}<br>
+                    <ul class="error">
+                        {% for error in signup_form.user_name.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}     
+                    </ul>
+                </p>
+        
+                <p>
+                    {{ signup_form.password.label }}<br>
+                    {{ signup_form.password() }}<br>
+                    <ul class="error">
+                        {% for error in signup_form.password.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </ul>
+                </p>
+        
+                <p>
+                    {{ signup_form.email.label }}<br>
+                    {{ signup_form.email() }}<br>
+                    <ul class="error">
+                        {% for error in signup_form.email.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </ul>
+                </p>
+
+                <p>
+                    {{ signup_form.age.label }}<br>
+                    {{ signup_form.age() }}<br>
+                    <ul class="error">
+                        {% for error in signup_form.age.errors %}
+                            <span style="color: red;">{{ error }}</span>
+                        {% endfor %}
+                    </ul>
+                </p>
+            </table>
+        </div>
+
+        <div class="margin">
+            <fieldset>
+                <legend><h5>性別登録：</h5></legend>
+                <div>
+                    <input type="radio" id="male" name="gender" value="m" checked />
+                    <label for="male">男</label>
+                </div>
+                <div>
+                    <input type="radio" id="female" name="gender" value="f" checked />
+                    <label for="female">女</label>
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="margin">
+        {{  signup_form.submit()  }}
+        </div>
+    </form>
+    <div class="margin">
+        <br>
+        <a href="/">メインページへ戻る</a>
+    </div>
+</body>
+</html>

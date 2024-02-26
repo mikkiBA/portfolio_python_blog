@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<body>
+    <div class="margin">
+        <div class="profile_box">
+            <span class="box_title">Profile</span>
+            <div class="profile_icon">
+                <img src="/static/uploads/{{current_user.icon_file_name}}" width="64" height="64">
+            </div>
+
+            <p>
+                ユーザー名：
+                    <ruby>
+                        {{current_user.user_name}}
+                        <rt>{{current_user.furigana}}</rt>
+                    </ruby>
+            </p>
+
+            <p>
+                自己紹介：{{current_user.profile}}
+            </p>
+        </div>
+    </div>
+
+    <div class="margin">
+        <a class="btn btn-outline-primary" href="{{ url_for('mypage_change_profile') }}" role="button">プロフィール情報変更</a>
+        <a class="btn btn-outline-primary" href="{{ url_for('mypage_icon_upload') }}" role="button">プロフィールアイコン画像変更</a>
+    </div>
+
+    <div class="margin">
+        <div class="table-responsive"></div>
+            <h3>あなたの投稿一覧</h3>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">タイトル</th>
+                            <th scope="col">内容</th>
+                            <th scope="col">いいね数</th>
+                            <th scope="col">投稿日</th>
+                            <th scope="col">更新日</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for content in contents %}
+                        <tr>
+                            <th scope="row"><a href="/content/{{content.id}}">{{content.title}}</a></th>
+                            <th>{{ content.body }}</th>
+                            <td>{{content.good_count}}</td>
+                            <td>{{ content.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>{{ content.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        
+                            <td>
+                                <a class="btn btn-outline-primary" href="{{ url_for('content_edit', content_id=content.id) }}" role="button">編集</a>
+                            </td>
+
+                            <td>
+                                <a class="btn btn-outline-primary" href="{{ url_for('content_delete', content_id=content.id) }}" role="button">削除</a>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+        </div>
+    </div>
+</body>
+
+{% endblock %}

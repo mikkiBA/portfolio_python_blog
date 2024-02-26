@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>よくあるブログサービス</title>
+</head>
+
+<body>
+    <a href="/">メインページへ戻る</a>
+    <h1>{{ user.user_name }}さんの投稿一覧</h1>
+
+    {% for user_content in user_contents %}
+
+    <p><h2>{{ user_content.title }}</h2></p>
+    <p>{{ user_content.body }}</p>
+    <p>{{ user_content.good_count }} good</p>
+    <p>{{ user_content.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+
+    {% endfor %}
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<body>
+    <div class="margin">
+        <p><h2>お問い合わせ管理</h2></p>
+        <br>
+        <table class="table table-striped">
+            <h3>問い合わせ一覧</h3>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ユーザー名</th>
+                <th scope="col">ステータス</th>
+                <th scope="col">件名・要約</th>
+                <th scope="col">問い合わせ詳細</th>
+                <th scope="col">回答</th>
+                <th scope="col">送信日</th>
+                <th scope="col">更新日</th>
+              </tr>
+            </thead>
+            <tbody>
+                    {% for inquiry in new_inquiries %}
+                    <tr>
+                        <th scope="row">{{ inquiry.id }}</th>
+                        <td>{{ inquiry.user.user_name }}</td>
+                        <td>{{ inquiry.status }}</td>
+                        <td>{{ inquiry.inquiry_title }}</td>
+                        <td>{{ inquiry.inquiry_content }}</td>
+                        <td>{{ inquiry.inquiry_reply }}</td>
+                        <td>{{ inquiry.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ inquiry.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    
+                        <td>
+                            <a class="btn btn-outline-primary" href="{{ url_for('inquiry_reply', inquiry_id=inquiry.id) }}" role="button">問い合わせ回答</a>
+                        </td>
+                    
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div class="margin">
+        <table class="table table-striped">
+            <h3>回答済 問い合わせ一覧</h3>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">ユーザー名</th>
+                <th scope="col">ステータス</th>
+                <th scope="col">件名・要約</th>
+                <th scope="col">問い合わせ詳細</th>
+                <th scope="col">回答</th>
+                <th scope="col">送信日</th>
+                <th scope="col">更新日</th>
+              </tr>
+            </thead>
+            <tbody>
+                    {% for inquiry in replied_inquiries %}
+                    <tr>
+                        <th scope="row">{{ inquiry.id }}</th>
+                        <td>{{ inquiry.user.user_name }}</td>
+                        <td>{{ inquiry.status }}</td>
+                        <td>{{ inquiry.inquiry_title }}</td>
+                        <td>{{ inquiry.inquiry_content }}</td>
+                        <td>{{ inquiry.inquiry_reply }}</td>
+                        <td>{{ inquiry.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ inquiry.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                    </tr>
+                    {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+</body>
+
+{% endblock %}

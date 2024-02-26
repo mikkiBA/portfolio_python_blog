@@ -1,0 +1,162 @@
+
+/* タイトル */
+.title_banner {
+  font-weight: bold;
+  border-bottom: 3px solid #e3e3e3;
+  padding: 0.3em;
+  margin-bottom: 0.3em;
+  position: relative;
+}
+.title_banner::after {
+  content: '';
+  background-color: #95ccff;
+  width: 2em;
+  height: 3px;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  z-index: 1;
+}
+
+
+
+/* ボタン */
+.btn--orange,
+a.btn--orange {
+  color: #fff;
+  background-color: #eb6100;
+}
+.btn--orange:hover,
+a.btn--orange:hover {
+  color: #fff;
+  background: #f56500;
+}
+
+
+/* mypage profile table */
+.profile_box {
+  position: relative;
+  margin: 2em 0;
+  padding: 0.5em 1em;
+  border: solid 3px #95ccff;
+  border-radius: 8px;
+}
+.profile_box .box_title {
+  position: absolute;
+  display: inline-block;
+  top: -13px;
+  left: 10px;
+  padding: 0 9px;
+  line-height: 1;
+  font-size: 19px;
+  background: #FFF;
+  color: #95ccff;
+  font-weight: bold;
+}
+
+
+/* mypage profile icon*/
+.profile_icon {
+  float: left;
+  margin: 10px;
+}
+
+/* others */
+p {
+  margin: 10px;
+}
+
+
+/* 要素の余白 - 全体 */
+.margin {
+  margin: 20px;
+}
+
+
+/* 要素の余白 - 右 */
+.margin_r {
+  margin-right: 0;
+  margin-left: auto;
+  width: 15%;
+ }
+
+
+/* indexの記事一覧 */
+.index_box {
+  border: 2px solid #aaa;
+
+  padding: 2em;
+  border-radius: 15px;
+  margin: 5px;
+}
+
+
+/* 入力欄の調整 */
+.container {
+  width: 90%;
+}
+
+
+/* 投稿 */
+h1 {
+  position: relative;
+  line-height: 1.4;
+  padding:0.25em 1em;
+  display: inline-block;
+  top:0;
+}
+
+h1:before, h1:after { 
+  position: absolute;
+  top: 0;
+  content:'';
+  width: 8px;
+  height: 100%;
+  display: inline-block;
+}
+h1:before {
+  border-left: solid 1px black;
+  border-top: solid 1px black;
+  border-bottom: solid 1px black;
+  left: 0;
+}
+h1:after {
+  content: '';
+  border-top: solid 1px black;
+  border-right: solid 1px black;
+  border-bottom: solid 1px black;
+  right: 0;
+}
+
+.content-body {
+    color: Gray;
+}
+
+.content-user {
+    border-top: double 5px #FFC778;
+}
+
+
+
+/* リンクの下線を消す、ホバーした時に線が出てくる＋色が変わる */
+a {
+    color: #FA8072;
+    text-decoration: none;
+  }
+
+
+a:hover{
+    color : #00BFFF;
+    text-decoration: underline;
+  }
+
+/* いいねマーク、押すと色が変わる */
+.good-btn:hover{
+    color : pink;
+    font-size : 1.1em;
+    cursor : pointer;
+}
+
+.good-btn-active{
+    color : red;
+}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="margin">
+    <h3>全ユーザー投稿一覧</h3>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">投稿id</th>
+                <th scope="col">投稿ユーザー</th>
+                <th scope="col">タイトル</th>
+                <th scope="col">内容</th>
+                <th scope="col">いいね数</th>
+                <th scope="col">投稿日</th>
+                <th scope="col">更新日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for content in content_all %}
+            <tr>
+                <th scope="row">{{ content.id }}</th>
+                <th>{{ content.user.user_name }}</th>
+                <th>{{ content.title }}</th>
+                <th>{{ content.body }}</th>
+                <td>{{content.good_count}}</td>
+                <td>{{ content.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                <td>{{ content.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            
+                <td>
+                    <a class="btn btn-outline-primary" href="{{ url_for('content_edit', content_id=content.id) }}" role="button">編集</a>
+                </td>
+
+                <td>
+                    <a class="btn btn-outline-primary" href="{{ url_for('content_delete', content_id=content.id) }}" role="button">削除</a>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+
+{% endblock %}

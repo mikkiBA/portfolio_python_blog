@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="margin">
+    <h3>ユーザー登録内容 編集</h3>
+    <form action="{{ url_for('user_edit', user_id=user.id) }}" method="POST">
+    <h4>現在の登録内容を表示しています。変更が必要な欄のみ入力してください</h4>
+        {{ usermanagement_form.hidden_tag() }}
+    
+        <table class="table">
+
+            <p>
+                {{ usermanagement_form.user_name.label }}<br>
+                {{ usermanagement_form.user_name(value=user.user_name) }}<br>
+                {% for error in usermanagement_form.user_name.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{ usermanagement_form.furigana.label }}<br>
+                {{ usermanagement_form.furigana(value=user.furigana) }}<br>
+                {% for error in usermanagement_form.furigana.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{ usermanagement_form.email.label }}<br>
+                {{ usermanagement_form.email(value=user.email) }}<br>
+                {% for error in usermanagement_form.email.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{ usermanagement_form.password.label }}<br>
+                {{ usermanagement_form.password(value=user.password) }}<br>
+                {% for error in usermanagement_form.password.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+            <fieldset>
+                <legend>性別設定:</legend>
+                    {% if user.gender == 'f' %}
+                    現在の登録内容：女
+                    {% else %}
+                    現在の登録内容：男
+                    {% endif %}
+                <div>
+                    <input type="radio" id="default" name="gender" value="default" checked />
+                    <label for="default">変更しない</label>
+                </div>
+            
+                <div>
+                    <input type="radio" id="male" name="gender" value="m"/>
+                    <label for="male">男</label>
+                </div>
+                <div>
+                    <input type="radio" id="female" name="gender" value="f"/>
+                    <label for="female">女</label>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>アクセス拒否設定 ON/OFF:</legend>
+                    {% if user.inaccessible == False %}
+                        {% set val = 'OFF' %}
+                    {% else %}
+                        {% set val = 'ON' %}
+                    {% endif %}
+                    現在の登録内容：{{ val }}
+                <div>
+                    <input type="radio" id="default" name="inaccessible" value="default" checked />
+                    <label for="default">変更しない</label>
+                </div>    
+                <div>
+                    <input type="radio" id="ture" name="inaccessible" value="True"/>
+                    <label for="ture">ON</label>
+                </div>
+                <div>
+                    <input type="radio" id="false" name="inaccessible" value="False"/>
+                    <label for="false">OFF</label>
+                </div>
+            </fieldset>
+
+            <p>
+                {{ usermanagement_form.profile.label }}<br>
+                {{ usermanagement_form.profile(value=user.profile) }}<br>
+                {% for error in usermanagement_form.profile.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+        </table>
+
+        {{  usermanagement_form.submit()  }}
+
+    </form>
+</div>
+
+{% endblock %}

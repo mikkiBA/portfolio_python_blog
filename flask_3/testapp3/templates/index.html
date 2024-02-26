@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{% for content in contents %}
+<div class="margin">
+    <div class="index_box">
+        <p>
+            <!-- contentの投稿者名とuser_idをリンクさせて各ユーザーの投稿一覧ページへ遷移 -->
+            <a href="https://webliker.info/"><a href="/content/{{ content.id }}"><h4>{{ content.title }}</h4></a></a>
+            <p>投稿者：<a href="/user/{{ content.user_id }}">{{ content.user.user_name }}</a></p>
+            {{ content.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}
+        </p>
+        <br>
+        {% if current_user.is_authenticated %}
+            <!-- ContentテーブルのgoodがTrueなら、いいねマークが赤くなる -->
+            {% if content.good %}
+            <i class="far fa-heart good-btn good-btn-active" data-content_id="{{content.id}}"></i>
+            
+            <!-- ContentテーブルのgoodがFalseなら、いいねマークが白いまま -->
+            {% else %}
+            <i class="far fa-heart good-btn" data-content_id="{{content.id}}"></i>
+            {% endif %}
+
+         <!-- 未ログイン状態なら、いいねマークのみ表示でボタン機能はない -->
+        {% else %}
+        <i class="far fa-heart" data-content_id="{{content.id}}"></i>
+        {% endif %}
+
+        <!-- いいね数の表示 -->
+        <span class="content_good_count">  {{content.good_count}}</span>
+
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

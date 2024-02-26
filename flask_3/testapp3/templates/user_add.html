@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="margin">
+    <h3>新規アカウント追加</h3>
+    <form action="{{ url_for('user_add') }}" method="POST">
+        {{ useradd_form.hidden_tag() }}
+
+        <table class="table">
+            <p>
+                {{ useradd_form.user_name.label }}<br>
+                {{ useradd_form.user_name() }}<br>
+                {% for error in useradd_form.user_name.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}     
+            </p>
+
+            <p>
+                {{ useradd_form.furigana.label }}<br>
+                {{ useradd_form.furigana() }}<br>
+                {% for error in useradd_form.furigana.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}     
+            </p>
+
+            <p>
+                {{ useradd_form.password.label }}<br>
+                {{ useradd_form.password() }}<br>
+                {% for error in useradd_form.password.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{ useradd_form.email.label }}<br>
+                {{ useradd_form.email() }}<br>
+                {% for error in useradd_form.email.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{ useradd_form.age.label }}<br>
+                {{ useradd_form.age() }}<br>
+                {% for error in useradd_form.age.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{ useradd_form.profile.label }}<br>
+                {{ useradd_form.profile() }}<br>
+                {% for error in useradd_form.profile.errors %}
+                <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+            <p>
+                <fieldset>
+                    <legend>性別設定:</legend>
+                    <div>
+                        <input type="radio" id="male" name="gender" value="m" checked/>
+                        <label for="male">男</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="female" name="gender" value="f"/>
+                        <label for="female">女</label>
+                    </div>
+                </fieldset>
+            </p>
+
+            <p>
+                <fieldset>
+                    <legend>アクセス拒否設定:</legend>  
+                    <div>
+                        <input type="radio" id="ture" name="inaccessible" value="True"/>
+                        <label for="ture">ON</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="false" name="inaccessible" value="False" checked/>
+                        <label for="false">OFF</label>
+                    </div>
+                </fieldset>
+            </p>
+
+            <p>
+                <fieldset>
+                    <legend>権限設定 :</legend>  
+                    <div>
+                        <input type="radio" id="ture" name="admin_flag" value="True"/>
+                        <label for="ture">Admin</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="false" name="admin_flag" value="False" checked/>
+                        <label for="false">一般ユーザー</label>
+                    </div>
+                </fieldset>
+            </p>
+        </table>
+        
+        {{  useradd_form.submit()  }}
+
+    </form>
+</div>
+
+
+
+
+{% endblock %}

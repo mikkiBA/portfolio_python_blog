@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>試作blog</title>
+    <link href="https://use.fontawesome.com/releases/v5.9.0/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/js/good.js"></script>
+</head>
+
+<body>
+    <a href="/">メインページへ戻る</a>
+    <div class="index_box">
+        <h1>{{ content.title }}</h1>
+        <p class="content-body">{{ content.body }}</p>
+        <p class="content-user">投稿者：{{ content.user.user_name }}</p>
+
+        {% if current_user.is_authenticated %}
+            {% if content.good %}
+            <i class="far fa-heart good-btn good-btn-active" data-content_id="{{content.id}}"></i>
+            {% else %}
+            <i class="far fa-heart good-btn" data-content_id="{{content.id}}"></i>
+            {% endif %}
+        {% else %}
+        <i class="far fa-heart" data-content_id="{{content.id}}"></i>
+        {% endif %}
+        <span class="content_good_count">  {{ content.good_count }}</span>
+
+    </div>
+</body>
+
+</html>

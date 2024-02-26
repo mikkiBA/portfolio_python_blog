@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="margin">
+    <h3>プロフィール情報 変更</h3>
+    <h4>{{ title }}</h4>
+    <form action="{{ url_for('mypage_change_profile', user_name=current_user.user_name) }}" method="POST">
+        {{ mypagechange_form.hidden_tag() }}
+        
+            <table class="table">
+                <p>
+                    {{ mypagechange_form.furigana.label }}<br>
+                    {{ mypagechange_form.furigana(value=user.furigana) }}<br>
+                    {% for error in mypagechange_form.furigana.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ mypagechange_form.user_name.label }}<br>
+                    {{ mypagechange_form.user_name(value=user.user_name) }}<br>
+                    {% for error in mypagechange_form.user_name.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </p>
+
+                <p>
+                    {{ mypagechange_form.profile.label }}<br>
+                    {{ mypagechange_form.profile(value=user.profile) }}<br>
+                    {% for error in mypagechange_form.profile.errors %}
+                        <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </p>
+        
+            </table>
+        
+        {{  mypagechange_form.submit()  }}
+        
+    </form>
+</div>
+
+{% endblock %}

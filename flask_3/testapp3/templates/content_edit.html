@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="margin">
+    <h3>投稿 編集</h3>
+    <form action="{{ url_for('content_edit', content_id=content.id) }}" method="POST">
+    <h4>現在の登録内容を表示しています。変更が必要な欄のみ入力してください</h4>
+        {{ contentedit_form.hidden_tag() }}
+    
+        <table class="table">
+
+            <p>
+                {{ contentedit_form.title.label }}<br>
+                {{ contentedit_form.title(value=content.title) }}<br>
+                {% for error in contentedit_form.title.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+            <p>
+                {{ contentedit_form.body.label }}<br>
+                {{ contentedit_form.body(value=content.body) }}<br>
+                {% for error in contentedit_form.body.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                {% endfor %}
+            </p>
+
+        </table>
+
+        {{  contentedit_form.submit()  }}
+
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="margin">
+    <span><h4>現在のプロフィール画像</h4></span>
+
+    <form action="{{ url_for('mypage_icon_upload', user_name=current_user.user_name) }}" method="POST" enctype="multipart/form-data">
+        
+        <div class="profile_icon">
+            <img src="/static/uploads/{{current_user.icon_file_name}}" width="128", height="128">
+        </div>
+        
+        <p>
+            <input type="file" name="icon">
+            <span>※png, jpgファイルのみ登録可能です</span>
+        </p>
+
+        <input type="submit" value="アップロード">
+    </form>
+</div>
+
+{% endblock %}

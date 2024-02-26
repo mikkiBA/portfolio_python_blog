@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="margin">
+    <div class="table-responsive">
+        <h3>現在の登録内容</h3>
+        <table class="table">
+            <tbody>
+                <tr>
+                    <td>メールアドレス：　{{ user_config.email }}</td>
+                    <td>
+                        <a class="btn btn-outline-primary" href="{{ url_for('config_change_email') }}" role="button">メールアドレス変更</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>パスワード：　{{ user_config.password }}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{url_for('config_change_password')}}" roke="button">パスワード変更</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <p>
+        <a href="{{ url_for('index', user_name=current_user.user_name) }}">戻る</a>
+    </p>
+</div>
+
+{% endblock %}

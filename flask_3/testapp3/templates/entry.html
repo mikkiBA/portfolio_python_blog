@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<div class="margin">
+    <h3>新規投稿 作成</h3>
+        <form method="POST" action="{{ url_for('entry') }}">
+            {{ entry_body.hidden_tag() }}
+
+            <table class="table">
+                <p>
+                    {{ entry_body.title.label }}<br>
+                    {{ entry_body.title() }}<br>
+                    {% for error in entry_body.title.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %} 
+                </p>
+            
+                <p>
+                    {{ entry_body.body.label }}<br>
+                    {{ entry_body.body() }}<br>
+                    {% for error in entry_body.body.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </p>
+
+            </table>
+
+                {{  entry_body.submit()  }}
+            </form>
+            <br>
+            <p>
+                <a href="{{ url_for('mypage', user_name=current_user.user_name) }}">戻る</a>
+            </p>
+            <br>
+</div>
+
+{% endblock %}

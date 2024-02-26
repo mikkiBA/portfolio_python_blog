@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<body>
+    <div class="margin">
+    <h2>お問い合わせページ</h2>
+        <table class="table table-striped">
+            <h3>問い合わせ一覧</h3>
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ステータス</th>
+                        <th scope="col">件名・要約</th>
+                        <th scope="col">問い合わせ詳細</th>
+                        <th scope="col">回答</th>
+                        <th scope="col">送信日</th>
+                        <th scope="col">更新日</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for user_inquiry in user_inquiries %}
+                        <tr>
+                            <th scope="row">{{ user_inquiry.id }}</th>
+                            <td>{{ user_inquiry.status }}</td>
+                            <td>{{ user_inquiry.inquiry_title }}</td>
+                            <td>{{ user_inquiry.inquiry_content }}</td>
+                            <td>{{ user_inquiry.inquiry_reply }}</td>
+                            <td>{{ user_inquiry.created_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>{{ user_inquiry.updated_at.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+        </table>
+    </div>
+            
+    <div class="margin">
+        <form method="POST" action="{{ url_for('inquiry')}}">
+            {{ inquiry_form.hidden_tag() }}
+            
+            <table class="table">
+                <h3>新規お問い合わせ</h3>
+                <p>
+                    {{ inquiry_form.inquiry_title.label }}<br>
+                    {{ inquiry_form.inquiry_title() }}<br>
+                    {% for error in inquiry_form.inquiry_title.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </p>
+            
+                <p>
+                    {{ inquiry_form.inquiry_content.label }}<br>
+                    {{ inquiry_form.inquiry_content() }}<br>
+                    {% for error in inquiry_form.inquiry_content.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </p>
+            </table>
+            
+            {{  inquiry_form.submit()  }}
+            
+        </form>
+    </div>
+</body>
+
+
+{% endblock %}

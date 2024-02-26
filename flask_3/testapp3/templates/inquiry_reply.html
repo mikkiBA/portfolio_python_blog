@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+<form method="POST" action="{{ url_for('inquiry_reply', inquiry_id=user_inquiry.id)}}">
+    {{ reply_form.hidden_tag() }}
+
+    <div class="margin">
+        <table class="table">
+            <h3>お問い合わせ対応</h3>
+            <h4>{{ title }}</h4>
+                <h4>問い合わせ内容</h4>
+                <p>ユーザー：{{ user_inquiry.user.user_name }}</p>
+                <p>件名：{{ user_inquiry.inquiry_title }}</p>
+                <p>詳細：{{ user_inquiry.inquiry_content }}</p>
+
+                <h4>上記問い合わせに対する回答</h4>
+                <p>
+                    {{ reply_form.inquiry_reply.label }}<br>
+                    {{ reply_form.inquiry_reply() }}<br>
+                    {% for error in reply_form.inquiry_reply.errors %}
+                    <span style="color: red;">{{ error }}</span>
+                    {% endfor %}
+                </p>
+        </table>
+    </div>
+
+    {{  reply_form.submit()  }}
+    
+</form>
+
+{% endblock %}
+
+
